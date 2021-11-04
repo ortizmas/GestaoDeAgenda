@@ -1,0 +1,62 @@
+﻿@model User
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+<div class="row justify-content-md-center mt-5">
+    <div class="col-md-5">
+        @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+        {
+            @*@Html.ValidationSummary()*@
+            @Html.AntiForgeryToken()
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Register</div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name, "", new { @class = "form-control", @placeholder = "Nome completo" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "E-mail" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @if (ViewBag.error != null)
+                        {
+                            <span class="text-danger">@ViewBag.error</span>
+                        }
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    @*<div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confim Password" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
+                    </div>*@
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Birthday)
+                        @Html.TextBoxFor(m => m.Birthday, "", new { @class = "form-control", @placeholder = "Data de Aniversario" })
+                        @Html.ValidationMessageFor(m => m.Birthday, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Gender)
+                        @Html.TextBoxFor(m => m.Gender, "", new { @class = "form-control", @placeholder = "Sexo" })
+                        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <input type="submit" name="submit" class="btn btn-danger" value="Register" />
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+<div class="row mt-5 d-flex justify-content-center align-items-center">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                Login
+            </div>
+            <div class="card-body">
+                @if (ViewBag.error != null)
+                {
+                    <span class="text-danger">@ViewBag.error</span>
+                }
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                {
+                    @Html.ValidationSummary()
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                    </div>
+
+                    <div class="form-group mt-3">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <input type="submit" name="submit" class="btn btn-dark" value="Login" />
+                        <a class="float-end" href="/Home/register">Registrar-se</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
